@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'Gatsby + Netlify CMS Starter',
+    siteUrl: `https://www.example.com`,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -33,5 +34,36 @@ module.exports = {
         modulePath: `${__dirname}/src/cms/cms.js`,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-tagmanager`,
+      options: {
+        id: "GTM-53JKHV5",
+        // Include GTM in development.
+        // Defaults to false meaning GTM will only be loaded in production.
+        includeInDevelopment: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/some-other-sitemap.xml`,
+        query: `
+        {
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+ 
+          allSitePage {
+            edges {
+              node {
+                path
+              }
+            }
+          }
+      }`
+      }
+    }
   ],
 };

@@ -2,6 +2,7 @@ const path = require("path");
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
+  const categoryPage = path.resolve("src/templates/posts-by-category.js");
 
   return graphql(`
     {
@@ -19,6 +20,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               path
               date
               title
+              category
               image
               heading
               description
@@ -72,7 +74,13 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       return Promise.reject(result.errors);
     }
 
-    return result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    const categorySet = new Set();
+
+    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      if (node.frontmatter.category) {
+        categorySet.add(node.frontmatter.category);
+      }
+
       const pagePath = node.frontmatter.path;
       createPage({
         path: pagePath,
@@ -82,6 +90,17 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         // additional data can be passed via context
         context: {
           path: pagePath
+        }
+      });
+    });
+
+    const categoryList = Array.from(categorySet);
+    categoryList.forEach(category => {
+      createPage({
+        path: `/categories/${category}/`,
+        component: categoryPage,
+        context: {
+          category
         }
       });
     });

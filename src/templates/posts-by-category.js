@@ -2,10 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import PostListing from '../components/PostListing';
 import config from '../../data/SiteConfig';
-
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+import {categories} from "../../data";
 
 export default class CategoryTemplate extends React.Component {
   render() {
@@ -13,18 +10,18 @@ export default class CategoryTemplate extends React.Component {
     return (
       <section className="section">
         <Helmet
-          title={`Posts in category "${capitalize(category)}" | ${
+          title={`Posts in category "${categories[category]}" | ${
             config.siteTitle
           }`}
         />
         <div className="container">
           <div className="content">
             <h1 className="has-text-weight-bold is-size-2">
-              Category: <i>{capitalize(category)}</i>
+              Category: <i>{categories[category]}</i>
             </h1>
           </div>
-          {this.props.data.allMarkdownRemark.edges.map(({ node }) => (
-            <PostListing key={node.id} post={node} />
+          {this.props.data.allMarkdownRemark.edges.map(({ node }, key) => (
+            <PostListing key={key} post={node} />
           ))}
         </div>
       </section>

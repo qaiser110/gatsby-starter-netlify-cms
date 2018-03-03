@@ -1,26 +1,26 @@
-import React from 'react';
-import Link from 'gatsby-link';
+import React from 'react'
+import Link from 'gatsby-link'
+import { categories } from '../../data'
 
-export default ({ post }) => (
+const CatLink = ({ category }) => (
+  <small className="cat-link">
+    {' in '}
+    <Link to={`/categories/${category}`}>{categories[category]}</Link>
+  </small>
+)
+
+export default ({ post, showCat }) => (
   <div
     className="content"
     style={{ border: '1px solid #eaecee', padding: '2em 4em' }}
-    key={post.id}
   >
     <p>
       <Link className="has-text-primary" to={post.frontmatter.path}>
         {post.frontmatter.title}
       </Link>
       <span> &bull; </span>
-      <small>
-        {post.frontmatter.date} in {' '}
-        <Link
-          className="cat-link"
-          to={`categories/${post.frontmatter.category}`}
-        >
-          {post.frontmatter.category}
-        </Link>
-      </small>
+      <small>{post.frontmatter.date}</small>
+      {showCat && <CatLink category={post.frontmatter.category} />}
     </p>
     <p>
       {post.excerpt}
@@ -31,4 +31,4 @@ export default ({ post }) => (
       </Link>
     </p>
   </div>
-);
+)

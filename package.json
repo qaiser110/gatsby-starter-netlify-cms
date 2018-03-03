@@ -29,6 +29,7 @@
   "main": "n/a",
   "scripts": {
     "start": "npm run develop",
+    "dev": "npm run develop",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "serve": "gatsby serve",

@@ -65,5 +65,12 @@ module.exports = {
         includeInDevelopment: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        // color: `tomato`,
+        showSpinner: false,
+      },
+    },
   ],
 };

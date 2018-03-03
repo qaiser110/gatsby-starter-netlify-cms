@@ -2,22 +2,22 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import PostListing from '../components/PostListing';
 import config from '../../data/SiteConfig';
-import {categories} from "../../data";
+import {tags} from "../../data";
 
 export default class CategoryTemplate extends React.Component {
   render() {
-    const category = this.props.pathContext.category;
+    const tag = this.props.pathContext.tag;
     return (
       <section className="section">
         <Helmet
-          title={`Posts in category "${categories[category]}" | ${
+          title={`Posts tagged "${tags[tag].title}" | ${
             config.siteTitle
           }`}
         />
         <div className="container">
           <div className="content">
             <h1 className="has-text-weight-bold is-size-2">
-              Category: <i>{categories[category]}</i>
+              Posts tagged "<i>{tags[tag].title}</i>"
             </h1>
           </div>
           {this.props.data.allMarkdownRemark.edges.map(({ node }, key) => (
@@ -31,11 +31,11 @@ export default class CategoryTemplate extends React.Component {
 
 /* eslint no-undef: "off"*/
 export const pageQuery = graphql`
-  query PostsByCategoryPage($category: String) {
+  query PostsByTagPage($tag: String) {
     allMarkdownRemark(
       limit: 1000
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: $category } } }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount
       edges {
@@ -47,7 +47,7 @@ export const pageQuery = graphql`
             category
             tags
             path
-            date
+            date(formatString: "MMMM DD, YYYY")
           }
         }
       }

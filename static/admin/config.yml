@@ -16,6 +16,7 @@ collections:
       - {label: "Path", name: "path", widget: "string"}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Tags", name: "tags", widget: "list", default: ["programming","testing","miscellaneous"]}
       - label: "Category"
         name: "category"
         widget: "select"

@@ -1,9 +1,10 @@
-import React from 'react'
-import graphql from 'graphql'
-import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
-import Content, { HTMLContent } from '../components/Content'
-import { categories } from '../../data'
+import React from 'react';
+import graphql from 'graphql';
+import Helmet from 'react-helmet';
+import Link from 'gatsby-link';
+import Content, { HTMLContent } from '../components/Content';
+import { categories } from '../../data';
+import PostTags from '../components/PostTags';
 
 export const BlogPostTemplate = ({
   content,
@@ -11,9 +12,10 @@ export const BlogPostTemplate = ({
   description,
   title,
   category,
+  tags,
   helmet,
 }) => {
-  const PostContent = contentComponent || Content
+  const PostContent = contentComponent || Content;
 
   return (
     <section className="section">
@@ -32,15 +34,17 @@ export const BlogPostTemplate = ({
             <br />
             <p>{description}</p>
             <PostContent content={content} />
+            <br />
+            <PostTags tags={tags} />
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default ({ data }) => {
-  const { markdownRemark: post } = data
+  const { markdownRemark: post } = data;
 
   return (
     <BlogPostTemplate
@@ -50,9 +54,10 @@ export default ({ data }) => {
       helmet={<Helmet title={`Blog | ${post.frontmatter.title}`} />}
       title={post.frontmatter.title}
       category={post.frontmatter.category}
+      tags={post.frontmatter.tags}
     />
-  )
-}
+  );
+};
 
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
@@ -63,8 +68,9 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         category
+        tags
         description
       }
     }
   }
-`
+`;

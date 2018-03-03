@@ -1,8 +1,10 @@
 const path = require("path");
+const {tags} = require("./data/index.js");
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
   const categoryPage = path.resolve("src/templates/posts-by-category.js");
+  const tagPage = path.resolve("src/templates/posts-by-tag.js");
 
   return graphql(`
     {
@@ -21,6 +23,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               date
               title
               category
+              tags
               image
               heading
               description
@@ -75,11 +78,24 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     }
 
     const categorySet = new Set();
+    const tagSet = new Set();
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
       if (node.frontmatter.category) {
         categorySet.add(node.frontmatter.category);
       }
+
+      if (node.frontmatter.tags)
+        node.frontmatter.tags.forEach(tag => {
+          if (!tags[tag]) {
+            const err = `Tag "${tag}" used in "${node.frontmatter.path}" doesn't exist in "data/index.js"
+Allowed values are: ${Object.keys(tags).join(', ')}
+`
+            throw new Error(err)
+
+          }
+          tagSet.add(tag)
+        })
 
       const pagePath = node.frontmatter.path;
       createPage({
@@ -90,6 +106,17 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
         // additional data can be passed via context
         context: {
           path: pagePath
+        }
+      });
+    });
+
+    const tagList = Array.from(tagSet);
+    tagList.forEach(tag => {
+      createPage({
+        path: `/tags/${tag}/`,
+        component: tagPage,
+        context: {
+          tag
         }
       });
     });

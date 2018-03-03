@@ -8,6 +8,9 @@ description: >-
   ordeal, but once you get used to the process, it becomes a soothing ritual
   that's worth the effort every time.
 category: home-made
+tags:
+    - programming
+    - testing
 ---
 ![chemex](/img/chemex.jpg)
 

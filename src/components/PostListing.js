@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import { categories } from '../../data'
+import PostTags from './PostTags'
 
 const CatLink = ({ category }) => (
   <small className="cat-link">
@@ -22,13 +23,15 @@ export default ({ post, showCat }) => (
       <small>{post.frontmatter.date}</small>
       {showCat && <CatLink category={post.frontmatter.category} />}
     </p>
-    <p>
+    <div>
       {post.excerpt}
       <br />
+      <br />
+      <PostTags tags={post.frontmatter.tags} />
       <br />
       <Link className="button is-small" to={post.frontmatter.path}>
         Keep Reading →
       </Link>
-    </p>
+    </div>
   </div>
 )

@@ -1,12 +1,12 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import PostListing from '../components/PostListing';
-import config from '../../data/SiteConfig';
-import {categories} from "../../data";
+import React from 'react'
+import Helmet from 'react-helmet'
+import PostListing from '../components/PostListing'
+import config from '../../data/SiteConfig'
+import { categories } from '../../data'
 
 export default class CategoryTemplate extends React.Component {
   render() {
-    const category = this.props.pathContext.category;
+    const category = this.props.pathContext.category
     return (
       <section className="section">
         <Helmet
@@ -25,7 +25,7 @@ export default class CategoryTemplate extends React.Component {
           ))}
         </div>
       </section>
-    );
+    )
   }
 }
 
@@ -53,4 +53,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

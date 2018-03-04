@@ -1,18 +1,16 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import PostListing from '../components/PostListing';
-import config from '../../data/SiteConfig';
-import {tags} from "../../data";
+import React from 'react'
+import Helmet from 'react-helmet'
+import PostListing from '../components/PostListing'
+import config from '../../data/SiteConfig'
+import { tags } from '../../data'
 
 export default class CategoryTemplate extends React.Component {
   render() {
-    const tag = this.props.pathContext.tag;
+    const tag = this.props.pathContext.tag
     return (
       <section className="section">
         <Helmet
-          title={`Posts tagged "${tags[tag].title}" | ${
-            config.siteTitle
-          }`}
+          title={`Posts tagged "${tags[tag].title}" | ${config.siteTitle}`}
         />
         <div className="container">
           <div className="content">
@@ -25,7 +23,7 @@ export default class CategoryTemplate extends React.Component {
           ))}
         </div>
       </section>
-    );
+    )
   }
 }
 
@@ -53,4 +51,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

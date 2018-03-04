@@ -1,9 +1,8 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import Script from 'react-load-script'
 import graphql from 'graphql'
 import PostListing from '../components/PostListing'
-require('prismjs/themes/prism-twilight.css');
+require('prismjs/themes/prism-twilight.css')
 
 export default class IndexPage extends React.Component {
   handleScriptLoad() {

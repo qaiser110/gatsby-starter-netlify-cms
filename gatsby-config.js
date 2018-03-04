@@ -26,15 +26,15 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          "gatsby-remark-prismjs",
-          "gatsby-remark-autolink-headers",
+          'gatsby-remark-prismjs',
+          'gatsby-remark-autolink-headers',
           {
-            resolve: "gatsby-remark-embed-video",
+            resolve: 'gatsby-remark-embed-video',
             options: {
               width: 800,
               ratio: 1.77, // Optional: Defaults to 16/9 = 1.77
               // height: 400 // Optional: Overrides optional.ratio
-            }
+            },
           },
           // 'gatsby-remark-embed-video',
           'gatsby-remark-responsive-iframe',
@@ -66,13 +66,13 @@ module.exports = {
               }
             }
           }
-      }`
-      }
+      }`,
+      },
     },
     {
       resolve: `gatsby-plugin-google-tagmanager`,
       options: {
-        id: "GTM-53JKHV5",
+        id: 'GTM-53JKHV5',
         // Include GTM in development.
         // Defaults to false meaning GTM will only be loaded in production.
         includeInDevelopment: false,
@@ -85,7 +85,7 @@ module.exports = {
         showSpinner: false,
       },
     },
-/*
+    /*
 // https://github.com/didierfranc/gatsby-plugin-google-fonts
     {
       resolve: `gatsby-plugin-google-fonts`,
@@ -103,4 +103,4 @@ module.exports = {
     },
 */
   ],
-};
+}

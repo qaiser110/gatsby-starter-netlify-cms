@@ -1,10 +1,10 @@
-import React from 'react';
-import graphql from 'graphql';
-import Helmet from 'react-helmet';
-import Link from 'gatsby-link';
-import Content, { HTMLContent } from '../components/Content';
-import { categories } from '../../data';
-import PostTags from '../components/PostTags';
+import React from 'react'
+import graphql from 'graphql'
+import Helmet from 'react-helmet'
+import Link from 'gatsby-link'
+import Content, { HTMLContent } from '../components/Content'
+import { categories } from '../../data'
+import PostTags from '../components/PostTags'
 
 export const BlogPostTemplate = ({
   content,
@@ -15,7 +15,7 @@ export const BlogPostTemplate = ({
   tags,
   helmet,
 }) => {
-  const PostContent = contentComponent || Content;
+  const PostContent = contentComponent || Content
 
   return (
     <section className="section">
@@ -40,11 +40,11 @@ export const BlogPostTemplate = ({
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
 export default ({ data }) => {
-  const { markdownRemark: post } = data;
+  const { markdownRemark: post } = data
 
   return (
     <BlogPostTemplate
@@ -56,8 +56,8 @@ export default ({ data }) => {
       category={post.frontmatter.category}
       tags={post.frontmatter.tags}
     />
-  );
-};
+  )
+}
 
 export const pageQuery = graphql`
   query BlogPostByPath($path: String!) {
@@ -73,4 +73,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

@@ -75,5 +75,22 @@ module.exports = {
         showSpinner: false,
       },
     },
+/*
+// https://github.com/didierfranc/gatsby-plugin-google-fonts
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Libre Baskerville\:400`,
+          `Yrsa\:400`,
+
+          `Libre Franklin\:400`,
+          `Open Sans\:400`,
+          `Open Sans\:400`,
+          // `source sans pro\:300,400,400i,700` // you can also specify font weights and styles
+        ]
+      }
+    },
+*/
   ],
 };

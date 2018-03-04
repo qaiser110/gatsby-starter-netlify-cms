@@ -5,6 +5,7 @@ import Link from 'gatsby-link'
 import Content, { HTMLContent } from '../components/Content'
 import { categories } from '../../data'
 import PostTags from '../components/PostTags'
+import './blog-post.sass'
 
 export const BlogPostTemplate = ({
   content,

@@ -234,10 +234,13 @@ But let's throw in a &lt;b&gt;tag&lt;/b&gt;.
 
 
 
-```javascript
+```javascript{1,3-5}
+// code-highlighting
 const s = "JavaScript syntax highlighting"
 const err = new Error()
 alert(s);
+console.log(s)
+return
 ```
 
 ```python

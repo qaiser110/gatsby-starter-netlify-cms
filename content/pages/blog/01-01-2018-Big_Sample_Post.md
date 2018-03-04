@@ -414,3 +414,23 @@ Or, in pure Markdown, but losing the image sizing and border:
 ```no-highlight
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 ```
+
+## gatsby-remark-embed-video
+
+https://github.com/borgfriend/gatsby-remark-embed-video
+
+```no-highlight
+`video: https://www.youtube.com/embed/qmzUJjIY9sQ`
+`youtube: https://www.youtube.com/watch?v=qmzUJjIY9sQ` 
+`youtube: qmzUJjIY9sQ`
+
+`vimeo: https://vimeo.com/5299404`
+`vimeo: 5299404`
+
+`videoPress: https://videopress.com/v/kUJmAcSf`
+`videoPress: kUJmAcSf`
+```
+
+`youtube: qmzUJjIY9sQ`
+
+`vimeo: 5299404`

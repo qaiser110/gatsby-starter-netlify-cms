@@ -28,6 +28,16 @@ module.exports = {
         plugins: [
           "gatsby-remark-prismjs",
           "gatsby-remark-autolink-headers",
+          {
+            resolve: "gatsby-remark-embed-video",
+            options: {
+              width: 800,
+              ratio: 1.77, // Optional: Defaults to 16/9 = 1.77
+              // height: 400 // Optional: Overrides optional.ratio
+            }
+          },
+          // 'gatsby-remark-embed-video',
+          'gatsby-remark-responsive-iframe',
         ],
       },
     },

@@ -5,22 +5,16 @@ import Link from 'gatsby-link'
 import Content, { HTMLContent } from '../components/Content'
 import { categories } from '../../data'
 import PostTags from '../components/PostTags'
+// import SEO from '../components/SEO'
 import './blog-post.sass'
 
-export const BlogPostTemplate = ({
-  content,
-  contentComponent,
-  description,
-  title,
-  category,
-  tags,
-  helmet,
-}) => {
+export const BlogPostTemplate = ({ post, contentComponent, helmet }) => {
   const PostContent = contentComponent || Content
-
+  const { path, title, description, cover, category, tags } = post.frontmatter
   return (
     <section className="section">
       {helmet || ''}
+      {/*<SEO postPath={path} postNode={post} postSEO />*/}
       <div className="container content">
         <div className="columns">
           <div className="column is-10 is-offset-1">
@@ -33,8 +27,9 @@ export const BlogPostTemplate = ({
             </Link>
             <br />
             <br />
+            <img src={cover} alt={`Image for "${title}"`} />
             <p>{description}</p>
-            <PostContent content={content} />
+            <PostContent content={post.html} />
             <br />
             <PostTags tags={tags} />
           </div>
@@ -49,13 +44,9 @@ export default ({ data }) => {
 
   return (
     <BlogPostTemplate
-      content={post.html}
+      post={post}
       contentComponent={HTMLContent}
-      description={post.frontmatter.description}
       helmet={<Helmet title={`Blog | ${post.frontmatter.title}`} />}
-      title={post.frontmatter.title}
-      category={post.frontmatter.category}
-      tags={post.frontmatter.tags}
     />
   )
 }
@@ -68,6 +59,7 @@ export const pageQuery = graphql`
         path
         date(formatString: "MMMM DD, YYYY")
         title
+        cover
         category
         tags
         description

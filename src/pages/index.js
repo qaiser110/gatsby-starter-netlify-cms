@@ -51,6 +51,7 @@ export const pageQuery = graphql`
           id
           frontmatter {
             title
+            cover
             category
             tags
             templateKey

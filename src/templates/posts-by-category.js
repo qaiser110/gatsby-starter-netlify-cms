@@ -44,6 +44,7 @@ export const pageQuery = graphql`
           timeToRead
           frontmatter {
             title
+            cover
             category
             tags
             path

@@ -2,6 +2,7 @@ backend:
   name: git-gateway
   branch: master
 
+publish_mode: editorial_workflow
 media_folder: static/img
 public_folder: /img
 
@@ -15,6 +16,7 @@ collections:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "blog-post"}
       - {label: "Path", name: "path", widget: "string"}
       - {label: "Title", name: "title", widget: "string"}
+      - {label: "Cover", name: "title", widget: "string", default: "./img/chemex.jpg"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Tags", name: "tags", widget: "list", default: ["programming","testing","miscellaneous"]}
       - label: "Category"

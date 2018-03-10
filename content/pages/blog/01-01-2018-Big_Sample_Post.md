@@ -1,7 +1,6 @@
 ---
 templateKey: blog-post
 path: /big-test
-cover: ./img/chemex.jpg
 title: "Big Test"
 date: 2018-01-01T15:04:10.000Z
 description: The Coffee Taster’s Flavor Wheel, the official resource used by coffee tasters, has been revised for the first time this year.

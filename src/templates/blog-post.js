@@ -2,13 +2,14 @@ import React from 'react'
 import graphql from 'graphql'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
+import Img from 'gatsby-image'
 import Content, { HTMLContent } from '../components/Content'
 import { categories } from '../../data'
 import PostTags from '../components/PostTags'
 // import SEO from '../components/SEO'
 import './blog-post.sass'
 
-export const BlogPostTemplate = ({ post, contentComponent, helmet }) => {
+export const BlogPostTemplate = ({ post, imageSharp, contentComponent, helmet }) => {
   const PostContent = contentComponent || Content
   const { path, title, description, cover, category, tags } = post.frontmatter
   return (
@@ -27,7 +28,7 @@ export const BlogPostTemplate = ({ post, contentComponent, helmet }) => {
             </Link>
             <br />
             <br />
-            <img src={cover} alt={`Image for "${title}"`} />
+            <Img sizes={imageSharp.sizes} alt={`Image for "${title}"`} />
             <p>{description}</p>
             <PostContent content={post.html} />
             <br />
@@ -40,10 +41,11 @@ export const BlogPostTemplate = ({ post, contentComponent, helmet }) => {
 }
 
 export default ({ data }) => {
-  const { markdownRemark: post } = data
+  const { markdownRemark: post, imageSharp } = data
 
   return (
     <BlogPostTemplate
+      imageSharp={imageSharp}
       post={post}
       contentComponent={HTMLContent}
       helmet={<Helmet title={`Blog | ${post.frontmatter.title}`} />}
@@ -52,7 +54,7 @@ export default ({ data }) => {
 }
 
 export const pageQuery = graphql`
-  query BlogPostByPath($path: String!) {
+  query BlogPostByPath($path: String!, $cover: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {
@@ -63,6 +65,11 @@ export const pageQuery = graphql`
         category
         tags
         description
+      }
+    }
+    imageSharp(id: { regex: $cover }) {
+      sizes(maxWidth: 1240) {
+        ...GatsbyImageSharpSizes_noBase64
       }
     }
   }

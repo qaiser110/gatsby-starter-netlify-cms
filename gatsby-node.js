@@ -22,6 +22,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               path
               date
               title
+              cover
               category
               tags
               image
@@ -104,8 +105,12 @@ Allowed values are: ${Object.keys(tags).join(', ')}
           `src/templates/${String(node.frontmatter.templateKey)}.js`
         ),
         // additional data can be passed via context
+        // Data passed to context is available in page queries as GraphQL variables.
         context: {
-          path: pagePath
+          path: pagePath,
+          cover: node.frontmatter.cover
+            ? `/${node.frontmatter.cover.split('/img/')[1].split('.')[0]}/`
+            : '/chemex/',
         }
       });
     });

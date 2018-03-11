@@ -7,6 +7,7 @@ import Content, { HTMLContent } from '../components/Content'
 import { categories } from '../../data'
 import PostTags from '../components/PostTags'
 import SEO from '../components/SEO'
+import SocialLinks from '../components/SocialLinks/SocialLinks'
 import './blog-post.sass'
 
 export const BlogPostTemplate = ({
@@ -37,6 +38,7 @@ export const BlogPostTemplate = ({
             <Img sizes={imageSharp.sizes} alt={`Image for "${title}"`} />
             <p>{description}</p>
             <PostContent content={post.html} />
+            <SocialLinks postPath={path} postNode={post} />
             <br />
             <PostTags tags={tags} />
           </div>
@@ -70,6 +72,7 @@ export const pageQuery = graphql`
         cover
         category
         tags
+        hashtags
         description
       }
     }

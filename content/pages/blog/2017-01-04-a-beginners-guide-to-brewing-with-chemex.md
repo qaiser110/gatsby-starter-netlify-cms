@@ -12,6 +12,9 @@ category: home-made
 tags:
     - programming
     - testing
+hashtags:
+    - programming
+    - testing
 ---
 ![chemex](/img/chemex.jpg)
 

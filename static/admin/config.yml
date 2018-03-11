@@ -19,6 +19,7 @@ collections:
       - {label: "Cover", name: "cover", widget: "image"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Tags", name: "tags", widget: "list", default: ["programming","testing","miscellaneous"]}
+      - {label: "Twitter Hashtags", name: "hashtags", widget: "list", default: ["programming","testing"]}
       - label: "Category"
         name: "category"
         widget: "select"

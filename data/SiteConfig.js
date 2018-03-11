@@ -3,7 +3,7 @@ module.exports = {
   siteTitle: 'My Gatsby Site', // Site title.
   siteTitleAlt: 'My Gatsby Site', // Alternative site title for SEO.
   siteLogo: '/logos/logo-1024.png', // Logo used for SEO and manifest.
-  siteUrl: 'https://vagr9k.github.io', // Domain of your website without pathPrefix.
+  siteUrl: 'https://elastic-hopper-403dd3.netlify.com', // Domain of your website without pathPrefix.
   pathPrefix: '/', // Prefixes all links. For cases when deployed to example.io/a-site-prefix/.
   siteDescription: 'A GatsbyJS stater with Advanced design', // Website description used for RSS feeds/meta description tag.
   siteRss: '/rss.xml', // Path to the RSS file.

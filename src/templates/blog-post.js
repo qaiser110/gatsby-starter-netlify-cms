@@ -7,6 +7,7 @@ import Content, { HTMLContent } from '../components/Content'
 import { categories } from '../../data'
 import PostTags from '../components/PostTags'
 import SEO from '../components/SEO'
+import UserInfo from '../components/UserInfo'
 import SocialLinks from '../components/SocialLinks/SocialLinks'
 import './blog-post.sass'
 
@@ -38,9 +39,12 @@ export const BlogPostTemplate = ({
             <Img sizes={imageSharp.sizes} alt={`Image for "${title}"`} />
             <p>{description}</p>
             <PostContent content={post.html} />
-            <SocialLinks postPath={path} postNode={post} />
-            <br />
-            <PostTags tags={tags} />
+            <div className="post-meta">
+              <SocialLinks postPath={path} postNode={post} />
+              <br />
+              <PostTags tags={tags} />
+            </div>
+            <UserInfo />
           </div>
         </div>
       </div>

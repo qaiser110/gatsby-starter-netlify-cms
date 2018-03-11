@@ -1,10 +1,10 @@
-const path = require("path");
-const {tags} = require("./data/index.js");
+const path = require('path')
+const { tags } = require('./data/index.js')
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
-  const { createPage } = boundActionCreators;
-  const categoryPage = path.resolve("src/templates/posts-by-category.js");
-  const tagPage = path.resolve("src/templates/posts-by-tag.js");
+  const { createPage } = boundActionCreators
+  const categoryPage = path.resolve('src/templates/posts-by-category.js')
+  const tagPage = path.resolve('src/templates/posts-by-tag.js')
 
   return graphql(`
     {
@@ -74,31 +74,32 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
     }
   `).then(result => {
     if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()));
-      return Promise.reject(result.errors);
+      result.errors.forEach(e => console.error(e.toString()))
+      return Promise.reject(result.errors)
     }
 
-    const categorySet = new Set();
-    const tagSet = new Set();
+    const categorySet = new Set()
+    const tagSet = new Set()
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
       if (node.frontmatter.category) {
-        categorySet.add(node.frontmatter.category);
+        categorySet.add(node.frontmatter.category)
       }
 
       if (node.frontmatter.tags)
         node.frontmatter.tags.forEach(tag => {
           if (!tags[tag]) {
-            const err = `Tag "${tag}" used in "${node.frontmatter.path}" doesn't exist in "data/index.js"
+            const err = `Tag "${tag}" used in "${
+              node.frontmatter.path
+            }" doesn't exist in "data/index.js"
 Allowed values are: ${Object.keys(tags).join(', ')}
 `
             throw new Error(err)
-
           }
           tagSet.add(tag)
         })
 
-      const pagePath = node.frontmatter.path;
+      const pagePath = node.frontmatter.path
       createPage({
         path: pagePath,
         component: path.resolve(
@@ -111,30 +112,32 @@ Allowed values are: ${Object.keys(tags).join(', ')}
           cover: node.frontmatter.cover
             ? `/${node.frontmatter.cover.split('/img/')[1].split('.')[0]}/`
             : '/chemex/',
-        }
-      });
-    });
+        },
+      })
+    })
 
-    const tagList = Array.from(tagSet);
+    const tagList = Array.from(tagSet)
     tagList.forEach(tag => {
       createPage({
         path: `/tags/${tag}/`,
         component: tagPage,
         context: {
-          tag
-        }
-      });
-    });
+          tag,
+        },
+      })
+    })
 
-    const categoryList = Array.from(categorySet);
+    const categoryList = Array.from(categorySet)
     categoryList.forEach(category => {
       createPage({
         path: `/categories/${category}/`,
         component: categoryPage,
         context: {
-          category
-        }
-      });
-    });
-  });
-};
+          category,
+        },
+      })
+    })
+
+    return Promise.resolve()
+  })
+}

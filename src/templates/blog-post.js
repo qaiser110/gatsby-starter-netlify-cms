@@ -6,16 +6,22 @@ import Img from 'gatsby-image'
 import Content, { HTMLContent } from '../components/Content'
 import { categories } from '../../data'
 import PostTags from '../components/PostTags'
-// import SEO from '../components/SEO'
+import SEO from '../components/SEO'
 import './blog-post.sass'
 
-export const BlogPostTemplate = ({ post, imageSharp, contentComponent, helmet }) => {
+export const BlogPostTemplate = ({
+  post,
+  imageSharp,
+  contentComponent,
+  helmet,
+}) => {
   const PostContent = contentComponent || Content
   const { path, title, description, cover, category, tags } = post.frontmatter
+  const smallImage = imageSharp.sizes.srcSet.split(' ')[0]
   return (
     <section className="section">
       {helmet || ''}
-      {/*<SEO postPath={path} postNode={post} postSEO />*/}
+      <SEO postSEO postPath={path} postNode={post} coverImage={smallImage} />
       <div className="container content">
         <div className="columns">
           <div className="column is-10 is-offset-1">

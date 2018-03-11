@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import {
   ShareButtons,
   ShareCounts,
@@ -18,22 +18,22 @@ import {
   TelegramIcon,
   GooglePlusIcon,
   LinkedinIcon,
-  RedditIcon
-} from "react-share";
-import config from "../../../data/SiteConfig";
-import "./SocialLinks.css";
+  RedditIcon,
+} from 'react-share'
+import config from '../../../data/SiteConfig'
+import './SocialLinks.sass'
 
 class SocialLinks extends Component {
   render() {
-    const { postNode, postPath, mobile } = this.props;
-    const post = postNode.frontmatter;
-    const realPrefix = config.pathPrefix === "/" ? "" : config.pathPrefix;
-    const url = config.siteUrl + realPrefix + postPath;
+    const { postNode, postPath, mobile } = this.props
+    const post = postNode.frontmatter
+    const realPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
+    const url = config.siteUrl + realPrefix + postPath
 
-    const iconSize = mobile ? 36 : 48;
-    const filter = count => (count > 0 ? count : "");
-console.log('----post.hashtags---');
-console.log(post.hashtags);
+    const iconSize = mobile ? 36 : 48
+    const filter = count => (count > 0 ? count : '')
+    console.log('----post.hashtags---')
+    console.log(post.hashtags)
     return (
       <div className="social-links">
         <RedditShareButton url={url} title={post.title}>
@@ -42,7 +42,11 @@ console.log(post.hashtags);
             {count => <div className="share-count">{filter(count)}</div>}
           </RedditShareCount>
         </RedditShareButton>
-        <TwitterShareButton url={url} title={post.title} hashtags={post.hashtags} >
+        <TwitterShareButton
+          url={url}
+          title={post.title}
+          hashtags={post.hashtags}
+        >
           <TwitterIcon round size={iconSize} />
         </TwitterShareButton>
         <GooglePlusShareButton url={url}>
@@ -71,8 +75,8 @@ console.log(post.hashtags);
           <TelegramIcon round size={iconSize} />
         </TelegramShareButton>
       </div>
-    );
+    )
   }
 }
 
-export default SocialLinks;
+export default SocialLinks

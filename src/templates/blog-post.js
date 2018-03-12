@@ -6,6 +6,7 @@ import Img from 'gatsby-image'
 import Content, { HTMLContent } from '../components/Content'
 import { categories } from '../../data'
 import PostTags from '../components/PostTags'
+import Chapters from '../components/SeriesChapters'
 import SEO from '../components/SEO'
 import UserInfo from '../components/UserInfo'
 import SocialLinks from '../components/SocialLinks/SocialLinks'
@@ -13,6 +14,8 @@ import './blog-post.sass'
 
 export const BlogPostTemplate = ({
   post,
+  series,
+  chapters,
   imageSharp,
   contentComponent,
   helmet,
@@ -20,13 +23,19 @@ export const BlogPostTemplate = ({
   const PostContent = contentComponent || Content
   const { path, title, description, cover, category, tags } = post.frontmatter
   const smallImage = imageSharp.sizes.srcSet.split(' ')[0]
+  const isSeries = series && series.chapters && series.chapters.length > 0
   return (
     <section className="section">
       {helmet || ''}
       <SEO postSEO postPath={path} postNode={post} coverImage={smallImage} />
       <div className="container content">
         <div className="columns">
-          <div className="column is-10 is-offset-1">
+          {isSeries && (
+            <div className="column is-3">
+              <Chapters series={series} chapters={chapters} />
+            </div>
+          )}
+          <div className={`column ${isSeries ? 'is-9' : 'is-9 offset-3'}`}>
             <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
               {title}
             </h1>
@@ -53,12 +62,23 @@ export const BlogPostTemplate = ({
 }
 
 export default ({ data }) => {
-  const { markdownRemark: post, imageSharp } = data
-
+  const { markdownRemark: post, imageSharp, chapters } = data
+  let chaps = {}
+  let series = null
+  if (chapters) {
+    chapters.edges.forEach(
+      ch =>
+        ch.node.frontmatter.path === ch.node.frontmatter.series
+          ? (series = ch.node.frontmatter)
+          : (chaps[ch.node.frontmatter.path] = ch.node.frontmatter)
+    )
+  }
   return (
     <BlogPostTemplate
       imageSharp={imageSharp}
       post={post}
+      series={series}
+      chapters={chaps}
       contentComponent={HTMLContent}
       helmet={<Helmet title={`Blog | ${post.frontmatter.title}`} />}
     />
@@ -66,13 +86,15 @@ export default ({ data }) => {
 }
 
 export const pageQuery = graphql`
-  query BlogPostByPath($path: String!, $cover: String!) {
+  query BlogPostByPath($path: String!, $cover: String!, $series: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {
         path
         date(formatString: "MMMM DD, YYYY")
         title
+        series
+        chapters
         cover
         category
         tags
@@ -83,6 +105,20 @@ export const pageQuery = graphql`
     imageSharp(id: { regex: $cover }) {
       sizes(maxWidth: 1240) {
         ...GatsbyImageSharpSizes_noBase64
+      }
+    }
+    chapters: allMarkdownRemark(
+      filter: { frontmatter: { series: { eq: $series } } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            path
+            title
+            series
+            chapters
+          }
+        }
       }
     }
   }

@@ -32,7 +32,11 @@ export default class IndexPage extends React.Component {
             <h1 className="has-text-weight-bold is-size-2">Latest Stories</h1>
           </div>
           {posts
-            .filter(post => post.node.frontmatter.templateKey === 'blog-post')
+            .filter(
+              post =>
+                post.node.frontmatter.templateKey === 'blog-post' &&
+                post.node.frontmatter.series !== post.node.frontmatter.path
+            )
             .map(({ node }, key) => (
               <PostListing key={key} post={node} showCat />
             ))}
@@ -57,6 +61,8 @@ export const pageQuery = graphql`
             templateKey
             date(formatString: "MMMM DD, YYYY")
             path
+            series
+            chapters
           }
         }
       }

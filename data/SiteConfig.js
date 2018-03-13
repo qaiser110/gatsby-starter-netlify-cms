@@ -12,7 +12,7 @@ module.exports = {
   disqusShortname: 'advanced-starter', // Disqus shortname.
   postDefaultCategoryID: 'Tech', // Default category for posts.
   userName: 'Qaiser Abbas', // Username to display in the author segment.
-  userTwitter: '', // Optionally renders "Follow Me" in the UserInfo segment.
+  userTwitter: 'qaiser110', // Optionally renders "Follow Me" in the UserInfo segment.
   userLocation: 'North Pole, Earth', // User location to display in the author segment.
   userAvatar: 'https://api.adorable.io/avatars/150/test.png', // User avatar to display in the author segment.
   userDescription:
@@ -21,21 +21,21 @@ module.exports = {
   userLinks: [
     {
       label: 'GitHub',
-      url: 'https://github.com/Vagr9K/gatsby-advanced-starter',
+      url: 'https://github.com/qaiser110',
       iconClassName: 'fa fa-github',
     },
     {
       label: 'Twitter',
-      url: 'https://twitter.com/Vagr9K',
+      url: 'https://twitter.com/qaiser110',
       iconClassName: 'fa fa-twitter',
     },
     {
       label: 'Email',
-      url: 'mailto:vagr9k@gmail.com',
+      url: 'mailto:qaiser110@gmail.com',
       iconClassName: 'fa fa-envelope',
     },
   ],
-  copyright: 'Copyright © 2017. Advanced User', // Copyright string for the footer of the website and RSS feed.
+  copyright: 'Copyright © Qaiser Abbas', // Copyright string for the footer of the website and RSS feed.
   themeColor: '#c62828', // Used for setting manifest and progress theme colors.
   backgroundColor: '#e0e0e0', // Used for setting manifest background color.
 }

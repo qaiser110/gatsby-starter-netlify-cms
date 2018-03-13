@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer/Footer'
+import config from '../../data/SiteConfig'
 import favicon from './favicon.png'
 import './all.sass'
 
@@ -16,6 +18,7 @@ const TemplateWrapper = ({ children }) => (
     </Helmet>
     <Navbar />
     <div>{children()}</div>
+    <Footer config={config} />
   </div>
 )
 

@@ -20,6 +20,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             frontmatter {
               templateKey
               path
+              series
+              chapters
               date
               title
               cover
@@ -100,20 +102,25 @@ Allowed values are: ${Object.keys(tags).join(', ')}
         })
 
       const pagePath = node.frontmatter.path
+      const cover = node.frontmatter.cover
+        ? `/${node.frontmatter.cover.split('/img/')[1].split('.')[0]}/`
+        : '/chemex/'
+
       createPage({
         path: pagePath,
         component: path.resolve(
           `src/templates/${String(node.frontmatter.templateKey)}.js`
         ),
-        // additional data can be passed via context
-        // Data passed to context is available in page queries as GraphQL variables.
         context: {
+          cover,
           path: pagePath,
-          cover: node.frontmatter.cover
-            ? `/${node.frontmatter.cover.split('/img/')[1].split('.')[0]}/`
-            : '/chemex/',
+          series: node.frontmatter.series || '',
         },
       })
+
+      if (node.frontmatter.series !== null) {
+      } else {
+      }
     })
 
     const tagList = Array.from(tagSet)

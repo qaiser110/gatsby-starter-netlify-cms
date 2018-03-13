@@ -32,8 +32,7 @@ class SocialLinks extends Component {
 
     const iconSize = mobile ? 36 : 48
     const filter = count => (count > 0 ? count : '')
-    console.log('----post.hashtags---')
-    console.log(post.hashtags)
+
     return (
       <div className="social-links">
         <RedditShareButton url={url} title={post.title}>

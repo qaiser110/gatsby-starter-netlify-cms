@@ -1,25 +1,35 @@
 import React from 'react'
 import Link from 'gatsby-link'
 
-export default ({ series, chapters }) => (
-  <div className="chapters-container">
-    <Link style={{ textDecoration: 'none' }} to={`${series.path}`}>
+export default ({ series, chapters, currPath }) => (
+  <aside id="series" className="menu">
+    <ul className="menu-list">
       <li>
-        <h2>{series.title}</h2>
+        <Link to={`${series.path}`}>
+          <a className={currPath === series.path ? 'is-active' : ''}>
+            {series.title}
+          </a>
+        </Link>
+        <ol className="chapters">
+          {series.chapters.map((chap, key) => (
+            <Link
+              key={key}
+              style={{ textDecoration: 'none' }}
+              to={`${chapters[chap].path}`}
+            >
+              <li>
+                <a
+                  className={
+                    currPath === chapters[chap].path ? 'is-active' : ''
+                  }
+                >
+                  {chapters[chap].title}
+                </a>
+              </li>
+            </Link>
+          ))}
+        </ol>
       </li>
-    </Link>
-    {series.chapters.map((chap, key) => (
-      <Link
-        key={key}
-        style={{ textDecoration: 'none' }}
-        to={`${chapters[chap].path}`}
-      >
-        <li>
-          <h6>
-            {key}. {chapters[chap].title}
-          </h6>
-        </li>
-      </Link>
-    ))}
-  </div>
+    </ul>
+  </aside>
 )

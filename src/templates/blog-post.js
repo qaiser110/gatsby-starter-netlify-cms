@@ -32,7 +32,7 @@ export const BlogPostTemplate = ({
         <div className="columns">
           {isSeries && (
             <div className="column is-3">
-              <Chapters series={series} chapters={chapters} />
+              <Chapters series={series} chapters={chapters} currPath={path} />
             </div>
           )}
           <div className={`column ${isSeries ? 'is-9' : 'is-9 offset-3'}`}>
